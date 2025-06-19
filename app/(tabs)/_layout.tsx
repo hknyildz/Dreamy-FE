@@ -88,7 +88,7 @@ const _layout = () => {
                 tabBarIcon: ({focused}) => (
                     <TabIcon
                         focused={focused}
-                        icon={icons.save}
+                        icon={icons.calendar}
                         title="Calendar"
                     />
                 )
