@@ -15,7 +15,7 @@ export default function Index() {
   };
 
   return (
-    <View className="flex-1 bg-primary justify-end">
+    <View className="flex-1 bg-primary justify-between py-20">
       {/* Night sky background */}
       <Image source={images.bg} className="absolute w-full h-full z-0" resizeMode="cover" />
       {/* Moon and branch (optional, can be added to bg image) */}
@@ -36,7 +36,7 @@ export default function Index() {
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           className="absolute inset-0 flex-1 justify-center items-center bg-primary/95 z-20"
         >
-          <View className="w-11/12 bg-dark-100 rounded-2xl p-5 shadow-xl">
+          <View className="w-11/12 bg-dark-100 rounded-2xl p-5 shadow-xl my-30">
             <TextInput
               className="text-light-100 text-base min-h-[120px] max-h-60 mb-4"
               multiline

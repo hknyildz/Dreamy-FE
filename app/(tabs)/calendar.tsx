@@ -343,7 +343,7 @@ export default function CalendarPage() {
           ))}
           {/* Animated entry form, always shown below dreams */}
           {showEntry && (
-            <Animated.View style={[{ overflow: 'hidden', marginTop: 16, minHeight: 350, maxHeight: 520, borderRadius: 24 }, entryStyle]}>
+            <Animated.View style={[{ overflow: 'hidden', marginTop: 16,marginBottom: 80, minHeight: 350, maxHeight: 520, borderRadius: 24 }, entryStyle]}>
                 <View className="w-full bg-[#23265A] rounded-2xl p-5 shadow-xl flex-1" style={{ minHeight: 320, maxHeight: 500, borderRadius: 24, justifyContent: 'flex-start' }}>
                   <TextInput
                     className="text-white text-base mb-3 px-3 py-2 bg-[#393C6C] rounded-xl"

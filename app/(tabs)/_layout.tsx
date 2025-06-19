@@ -38,13 +38,14 @@ const _layout = () => {
                 width: '100%',
                 height: '100%',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
             },
             tabBarStyle: {
                 backgroundColor: '#0f0d23',
                 borderRadius: 50,
                 marginHorizontal: 20,
                 marginBottom: 36,
+                marginTop: 30,
                 height: 52,
                 position: "absolute",
                 overflow: "hidden",
