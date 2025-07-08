@@ -38,7 +38,7 @@ export default function Profile() {
           </Pressable>
           {/* Avatar - floating/overflow */}
           <View className="items-center">
-            <View className="w-24 h-24 rounded-full bg-[#C1B6E3] border-4 border-white absolute -top-12 z-20 shadow-lg" />
+            <View className="w-24 h-24 rounded-full bg-[#C1B6E3] border-4 border-white absolute-top-12 z-20 shadow-lg" />
           </View>
           {/* Username and stats */}
           <View className="items-center mt-16">
