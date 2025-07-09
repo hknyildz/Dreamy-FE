@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, Pressable, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, Pressable, ScrollView, SafeAreaView, Alert } from 'react-native';
+import { useAuth } from '@/contexts/AuthContext';
+import { router } from 'expo-router';
 
 // Mock data
 const user = {
@@ -27,14 +29,34 @@ function DateCircle({ date }: { date: string }) {
 }
 
 export default function Profile() {
+  const { signOut, user } = useAuth();
+
+  const handleSignOut = async () => {
+    Alert.alert(
+      'Sign Out',
+      'Are you sure you want to sign out?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Sign Out',
+          style: 'destructive',
+          onPress: async () => {
+            await signOut();
+            router.replace('index');
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-[#181B3A]">
       <ScrollView contentContainerStyle={{ paddingBottom: 32 }} showsVerticalScrollIndicator={false}>
         {/* Header section */}
         <View className="bg-[#8F7EDC] rounded-b-3xl px-6 pt-2 pb-6 relative">
           {/* Settings icon */}
-          <Pressable className="absolute right-6 top-6 z-10">
-            <Text className="text-white text-base">⚙️</Text>
+          <Pressable className="absolute right-6 top-6 z-10" onPress={handleSignOut}>
+            <Text className="text-white text-base">🚪</Text>
           </Pressable>
           {/* Avatar - floating/overflow */}
           <View className="items-center">
