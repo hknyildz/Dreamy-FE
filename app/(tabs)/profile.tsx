@@ -2,27 +2,49 @@ import React from 'react';
 import { View, Text, Pressable, ScrollView, SafeAreaView, Alert } from 'react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { router } from 'expo-router';
+import { fetchDreamsByUserId } from '@/services/dreamService';
+import { fetchFollowerCount } from '@/services/profileService';
+import { useEffect, useState } from 'react';
 
-const entries = [
-  { date: '16 mar', title: 'Fena bi rüya', preview: 'rüyamın özeti/dam gibi, olay özetim', private: false },
-  { date: '15 mar', title: 'Rüya 2', preview: 'rüya içeriği', private: false },
-  { date: '09 mar', title: 'Rüya 3', preview: 'rüya içeriği', private: false },
-  { date: '28 feb', title: 'Rüya 4', preview: 'rüya içeriği', private: false },
-  { date: '27 feb', title: 'Rüya 5', preview: 'rüya içeriği', private: false },
-];
+type Props = {
+  timestamp: string; // "2025-07-09T15:30:00Z"
+};
 
-function DateCircle({ date }: { date: string }) {
-  const [day, month] = date.split(' ');
+function DateCircle({ timestamp }: Props) {
+  const dateObj = new Date(timestamp);
+
+  const day = dateObj.getDate().toString().padStart(2, '0');
+  const month = dateObj.toLocaleString('en-US', { month: 'short' }).toLowerCase(); // örn: jul
+  const hours = dateObj.getHours().toString().padStart(2, '0');
+  const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+  const time = `${hours}:${minutes}`;
+
   return (
-    <View className="w-12 h-12 bg-[#8F7EDC] rounded-full items-center justify-center mr-4">
-      <Text className="text-white text-base font-bold leading-5">{day}</Text>
-      <Text className="text-white text-xs lowercase leading-3">{month}</Text>
+    <View className="w-12 h-14 bg-[#8F7EDC] rounded-full items-center justify-center mr-4 py-1">
+      <Text className="text-white text-base font-bold leading-5 mb-1">{day}</Text>
+      <Text className="text-white text-xs font-bold lowercase leading-3">{month}</Text>
     </View>
   );
 }
 
+
+
 export default function Profile() {
   const { signOut, user, profile } = useAuth();
+  const [followerCount, setFollowerCount] = useState<number>(0);
+  const [dreams, setDreams] = useState<Dream[]>([]);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      if (!user) return;
+      const data = await fetchDreamsByUserId(user?.id);
+      const followerCount = await fetchFollowerCount(user?.id);
+      setFollowerCount(followerCount);
+      setDreams(data);
+    };
+  
+    fetchProfileData();
+  }, [user]);
 
   const handleSignOut = async () => {
     Alert.alert(
@@ -41,6 +63,7 @@ export default function Profile() {
       ]
     );
   };
+  
 
   return (
     <SafeAreaView className="flex-1 bg-[#181B3A]">
@@ -61,11 +84,11 @@ export default function Profile() {
             <Text className="text-white text-xl mt-2">{profile?.bio}</Text>
             <View className="flex-row space-x-8 mt-2">
               <View className="items-center mx-2">
-                <Text className="text-white text-lg font-bold">20</Text>
+                <Text className="text-white text-lg font-bold">{dreams.length}</Text>
                 <Text className="text-white text-xs">Dreams</Text>
               </View>
               <View className="items-center mx-2">
-                <Text className="text-white text-lg font-bold">5</Text>
+                <Text className="text-white text-lg font-bold">{followerCount}</Text>
                 <Text className="text-white text-xs ">Friends</Text>
               </View>
             </View>
@@ -74,19 +97,19 @@ export default function Profile() {
         {/* Entries */}
         <View className="px-4 pt-8">
           <Text className="text-[#C1B6E3] text-lg font-semibold mb-2">Dreams</Text>
-          {entries.map((entry, idx) => (
+          {dreams.map((dream, idx) => (
             <View
               key={idx}
               className="flex-row items-center mb-4 bg-[#393C6C] rounded-3xl px-4 py-3 shadow-lg"
               style={{ minHeight: 64 }}
             >
-              <DateCircle date={entry.date} />
+              <DateCircle timestamp={dream.dream_date} />
               <View className="flex-1">
-                <Text className="text-white text-base font-semibold mb-1">{entry.title}</Text>
-                <Text className="text-[#C1B6E3] text-xs" numberOfLines={1}>{entry.preview}</Text>
+                <Text className="text-white text-base font-semibold mb-1">{dream.title}</Text>
+                <Text className="text-[#C1B6E3] text-xs" numberOfLines={1}>{dream.content}</Text>
               </View>
               {/* Private icon if needed */}
-              {entry.private && (
+              {dream.is_private && (
                 <Text className="ml-2 text-[#C1B6E3]">🔒</Text>
               )}
             </View>
