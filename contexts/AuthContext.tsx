@@ -4,6 +4,7 @@ import { Session, User } from '@supabase/supabase-js';
 
 type AuthContextType = {
   user: User | null;
+  profile: profile | null;
   session: Session | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
@@ -23,6 +24,7 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<profile | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,8 +33,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      if (session?.user) {
+        console.debug('User Fetched:', user?.email);
+        fetchUserProfile(session.user.id);
+      }
       setLoading(false);
     });
+
+    const fetchUserProfile = async (userId: string) => {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+  
+      if (error) {
+        console.error('Error fetching profile:', error.message);
+      } else {
+        setProfile(data);
+      }
+    };
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -68,6 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const value = {
     user,
+    profile,
     session,
     loading,
     signIn,
@@ -81,3 +102,4 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     </AuthContext.Provider>
   );
 };
+
