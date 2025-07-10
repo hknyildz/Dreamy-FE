@@ -96,7 +96,7 @@ export default function SignIn() {
           {/* Sign Up Link */}
           <View className="flex-row justify-center mt-8 pt-6 border-t border-dark-200">
             <Text className="text-light-200 text-base">Don't have an account? </Text>
-            <Pressable onPress={() => router.push('signup')}>
+            <Pressable onPress={() => router.push('/signup')}>
               <Text className="text-accent font-semibold text-base">Sign Up</Text>
             </Pressable>
           </View>
