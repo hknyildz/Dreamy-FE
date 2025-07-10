@@ -3,13 +3,6 @@ import { View, Text, Pressable, ScrollView, SafeAreaView, Alert } from 'react-na
 import { useAuth } from '@/contexts/AuthContext';
 import { router } from 'expo-router';
 
-// Mock data
-const user = {
-  username: 'Aybike',
-  avatar: '', // Use a placeholder color circle
-  dreams: 50,
-  friends: 4,
-};
 const entries = [
   { date: '16 mar', title: 'Fena bi rüya', preview: 'rüyamın özeti/dam gibi, olay özetim', private: false },
   { date: '15 mar', title: 'Rüya 2', preview: 'rüya içeriği', private: false },
@@ -29,7 +22,7 @@ function DateCircle({ date }: { date: string }) {
 }
 
 export default function Profile() {
-  const { signOut, user } = useAuth();
+  const { signOut, user, profile } = useAuth();
 
   const handleSignOut = async () => {
     Alert.alert(
@@ -42,7 +35,7 @@ export default function Profile() {
           style: 'destructive',
           onPress: async () => {
             await signOut();
-            router.replace('index');
+            router.push('/signin');
           },
         },
       ]
@@ -63,23 +56,24 @@ export default function Profile() {
             <View className="w-24 h-24 rounded-full bg-[#C1B6E3] border-4 border-white absolute-top-12 z-20 shadow-lg" />
           </View>
           {/* Username and stats */}
-          <View className="items-center mt-16">
-            <Text className="text-white text-xl font-bold mt-2">{user.username}</Text>
+          <View className="items-center mt-4">
+            <Text className="text-white text font-bold mt-1">{profile?.username}</Text>
+            <Text className="text-white text-xl mt-2">{profile?.bio}</Text>
             <View className="flex-row space-x-8 mt-2">
-              <View className="items-center">
-                <Text className="text-white text-lg font-bold">{user.dreams}</Text>
+              <View className="items-center mx-2">
+                <Text className="text-white text-lg font-bold">20</Text>
                 <Text className="text-white text-xs">Dreams</Text>
               </View>
-              <View className="items-center">
-                <Text className="text-white text-lg font-bold">{user.friends}</Text>
-                <Text className="text-white text-xs">Friends</Text>
+              <View className="items-center mx-2">
+                <Text className="text-white text-lg font-bold">5</Text>
+                <Text className="text-white text-xs ">Friends</Text>
               </View>
             </View>
           </View>
         </View>
         {/* Entries */}
         <View className="px-4 pt-8">
-          <Text className="text-[#C1B6E3] text-lg font-semibold mb-2">Entries</Text>
+          <Text className="text-[#C1B6E3] text-lg font-semibold mb-2">Dreams</Text>
           {entries.map((entry, idx) => (
             <View
               key={idx}

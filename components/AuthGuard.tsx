@@ -10,10 +10,10 @@ export const AuthGuard: React.FC<{ children: React.ReactNode }> = ({ children })
     if (!loading) {
       if (user) {
         // User is authenticated, redirect to main app
-        router.replace('/(tabs)');
+        router.push('/(tabs)');
       } else {
         // User is not authenticated, redirect to sign in
-        router.replace('signin');
+        router.push('/signin');
       }
     }
   }, [user, loading]);

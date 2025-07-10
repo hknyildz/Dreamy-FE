@@ -75,3 +75,10 @@ interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
 }
+
+interface profile {
+  username: string,
+  bio: string,
+  is_private: boolean,
+  avatar_url: string
+}
