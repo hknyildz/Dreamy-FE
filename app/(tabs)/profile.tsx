@@ -27,14 +27,11 @@ function DateCircle({ timestamp }: Props) {
   );
 }
 
-
-
 export default function Profile() {
   const { signOut, user, profile } = useAuth();
   const [followerCount, setFollowerCount] = useState<number>(0);
   const [dreams, setDreams] = useState<Dream[]>([]);
   const [refreshing, setRefreshing] = useState(false);
-
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -75,11 +72,11 @@ export default function Profile() {
     setFollowerCount(followerCount);
     setRefreshing(false);
   };
-  
 
   return (
     <SafeAreaView className="flex-1 bg-[#181B3A]">
-      <ScrollView contentContainerStyle={{ paddingBottom: 32 }}
+      <ScrollView 
+        contentContainerStyle={{ paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
