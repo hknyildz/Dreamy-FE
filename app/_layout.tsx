@@ -22,6 +22,14 @@ export default function RootLayout() {
           name="signup"
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="dream/[id]"
+          options={{ headerShown: true }} //TODO will change to false
+        />
+        <Stack.Screen
+          name="profile/[userId]"
+          options={{ headerShown: true }} //TODO will change to false
+        />
       </Stack>
     </AuthProvider>
   );
