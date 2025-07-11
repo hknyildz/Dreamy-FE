@@ -18,6 +18,7 @@ function DateCircle({ timestamp }: Props) {
   const hours = dateObj.getHours().toString().padStart(2, '0');
   const minutes = dateObj.getMinutes().toString().padStart(2, '0');
   const time = `${hours}:${minutes}`;
+  
 
   return (
     <View className="w-12 h-14 bg-[#8F7EDC] rounded-full items-center justify-center mr-4 py-1">
