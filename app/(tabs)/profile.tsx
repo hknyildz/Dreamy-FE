@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable, ScrollView, SafeAreaView, Alert } from 'react-native';
+import { View, Text, Pressable, ScrollView, SafeAreaView, Alert, RefreshControl } from 'react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { router } from 'expo-router';
 import { fetchDreamsByUserId } from '@/services/dreamService';
@@ -18,6 +18,7 @@ function DateCircle({ timestamp }: Props) {
   const hours = dateObj.getHours().toString().padStart(2, '0');
   const minutes = dateObj.getMinutes().toString().padStart(2, '0');
   const time = `${hours}:${minutes}`;
+  
 
   return (
     <View className="w-12 h-14 bg-[#8F7EDC] rounded-full items-center justify-center mr-4 py-1">
@@ -33,6 +34,8 @@ export default function Profile() {
   const { signOut, user, profile } = useAuth();
   const [followerCount, setFollowerCount] = useState<number>(0);
   const [dreams, setDreams] = useState<Dream[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -63,11 +66,31 @@ export default function Profile() {
       ]
     );
   };
+
+    const onRefresh = async () => {
+    if (!user) return;
+
+    setRefreshing(true);
+    const data = await fetchDreamsByUserId(user.id);
+    const followerCount = await fetchFollowerCount(user.id);
+    setDreams(data);
+    setFollowerCount(followerCount);
+    setRefreshing(false);
+    };
   
 
   return (
     <SafeAreaView className="flex-1 bg-[#181B3A]">
-      <ScrollView contentContainerStyle={{ paddingBottom: 32 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 32 }} showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        colors={['#8F7EDC']}
+        tintColor="#8F7EDC"
+        />
+      }
+      >
         {/* Header section */}
         <View className="bg-[#8F7EDC] rounded-b-3xl px-6 pt-2 pb-6 relative">
           {/* Settings icon */}

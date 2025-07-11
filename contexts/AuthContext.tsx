@@ -33,9 +33,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      if (session?.user) {
+      if (user) {
         console.debug('User Fetched:', user?.email);
-        fetchUserProfile(session.user.id);
+        fetchUserProfile(user.id);
       }
       setLoading(false);
     });
