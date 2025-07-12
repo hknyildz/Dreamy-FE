@@ -85,3 +85,23 @@ export const updateProfilePrivacy = async (userId: string, isPrivate: boolean): 
   }
   return true;
 };
+
+export const searchUsers = async (searchTerm: string, limit = 20, offset = 0) => {
+  if (!searchTerm.trim()) {
+    return [];
+  }
+  
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('id, username, bio, avatar_url')
+    .ilike('username', `%${searchTerm}%`)
+    .range(offset, offset + limit - 1)
+    .order('username');
+  
+  if (error) {
+    console.error('Error searching users:', error.message);
+    return [];
+  }
+  
+  return data || [];
+};
