@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { images } from "@/constants/images";
 import { View, Image, Text, Pressable, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import FloatingCreateButton from '@/components/FloatingCreateButton';
 
 export default function Index() {
   const [expanded, setExpanded] = useState(false);
@@ -74,6 +75,9 @@ export default function Index() {
           </View>
         </KeyboardAvoidingView>
       )}
+      
+      {/* Floating Create Button - only show when not expanded */}
+      {!expanded && <FloatingCreateButton />}
     </View>
   );
 }

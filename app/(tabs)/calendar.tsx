@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, Pressable, ScrollView, TextInput, KeyboardAvoidingView, Platform, Animated, Easing, SafeAreaView, Modal, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import FloatingCreateButton from '@/components/FloatingCreateButton';
 
 // Initial mock dream data by date (YYYY-MM-DD)
 const initialDreamsByDate: Record<string, { title: string; preview: string }[]> = {
@@ -410,6 +411,9 @@ export default function CalendarPage() {
         </ScrollView>
       )}
       </KeyboardAvoidingView>
+      
+      {/* Floating Create Button - only show when a date is selected */}
+      {selectedDate && <FloatingCreateButton showDatePicker={true} />}
     </SafeAreaView>
   );
 }
