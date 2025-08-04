@@ -97,7 +97,7 @@ export default function UserProfile() {
         }
       >
         {/* Header section */}
-        <View className="bg-[#8F7EDC] rounded-b-3xl px-6 pt-2 pb-6 relative">
+        <View className="bg-dark-300 rounded-b-3xl px-6 pt-2 pb-6 relative">
           {/* Avatar */}
           <View className="items-center">
             <View className="w-24 h-24 rounded-full bg-[#C1B6E3] border-4 border-white z-20 shadow-lg" />
@@ -156,7 +156,7 @@ export default function UserProfile() {
               )}
             </>
           ) : (
-            <View className="bg-[#393C6C] rounded-3xl p-6 mt-4 items-center">
+            <View className="bg-dark-400 rounded-3xl p-6 mt-4 items-center">
               <Text className="text-white text-lg font-bold mb-2">This profile is private</Text>
               <Text className="text-[#A8B5DB] text-center mb-4">
                 Follow {profile.username} to see their dreams

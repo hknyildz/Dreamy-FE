@@ -253,7 +253,7 @@ export default function CalendarPage() {
           onCancel={() => setShowDatePicker(false)}
           display={Platform.OS === 'ios' ? 'inline' : 'calendar'}
         />
-        <View className="flex-row flex-wrap justify-between bg-[#23265A] rounded-2xl p-4 mb-6">
+        <View className="flex-row flex-wrap justify-between bg-dark-300 rounded-2xl p-4 mb-6">
           {[...Array(daysInMonth)].map((_, i) => {
             const d = i + 1;
             const dateStr = formatDate(d);
@@ -261,7 +261,7 @@ export default function CalendarPage() {
             return (
               <Pressable
                 key={d}
-                className={`w-10 h-10 mb-2 items-center justify-center rounded-full ${selectedDate === dateStr ? 'bg-[#8F7EDC]' : hasDream ? 'bg-[#393C6C]' : 'bg-transparent'}`}
+                className={`w-10 h-10 mb-2 items-center justify-center rounded-full ${selectedDate === dateStr ? 'bg-[#8F7EDC]' : hasDream ? 'bg-dark-400' : 'bg-transparent'}`}
                 onPress={() => setSelectedDate(dateStr)}
               >
                 <Text className={`text-white font-semibold ${hasDream ? '' : 'opacity-50'}`}>{d}</Text>
@@ -277,7 +277,10 @@ export default function CalendarPage() {
           contentContainerStyle={{ paddingBottom: insets.bottom + 80 }}
           keyboardShouldPersistTaps="handled"
         >
-          {/* List all dreams for the date */}
+          {/* List all dreams for the date 
+          dark1- 393C6C
+          dark2- 23265A
+          */}
           {dreamsByDate[selectedDate] && dreamsByDate[selectedDate].map((dream, idx) => (
             expandedDream && expandedDream.date === selectedDate && expandedDream.idx === idx ? (
               // Expanded editable dream card
@@ -285,13 +288,13 @@ export default function CalendarPage() {
                 <DateCircle date={selectedDate} />
                 <View style={{ flex: 1 }}>
                   <TextInput
-                    className="text-white text-base font-semibold mb-2 px-3 py-2 bg-[#23265A] rounded-xl"
+                    className="text-white text-base font-semibold mb-2 px-3 py-2 bg-dark-300 rounded-xl"
                     value={editTitle}
                     onChangeText={setEditTitle}
                     maxLength={100}
                   />
                   <TextInput
-                    className="text-white text-base min-h-[80px] max-h-32 mb-2 px-3 py-2 bg-[#23265A] rounded-xl"
+                    className="text-white text-base min-h-[80px] max-h-32 mb-2 px-3 py-2 bg-dark-300 rounded-xl"
                     multiline
                     value={editContent}
                     onChangeText={setEditContent}
@@ -299,13 +302,13 @@ export default function CalendarPage() {
                   />
                   {/* Markdown controls */}
                   <View className="flex-row justify-center space-x-4 mb-2">
-                    <Pressable onPress={() => handleMarkdown('bold', true)} className="px-3 py-1 bg-[#393C6C] rounded-full border border-[#8F7EDC]">
+                    <Pressable onPress={() => handleMarkdown('bold', true)} className="px-3 py-1 bg-dark-400 rounded-full border border-[#8F7EDC]">
                       <Text className="text-white font-bold">B</Text>
                     </Pressable>
-                    <Pressable onPress={() => handleMarkdown('italic', true)} className="px-3 py-1 bg-[#393C6C] rounded-full border border-[#8F7EDC]">
+                    <Pressable onPress={() => handleMarkdown('italic', true)} className="px-3 py-1 bg-dark-400 rounded-full border border-[#8F7EDC]">
                       <Text className="text-white italic">I</Text>
                     </Pressable>
-                    <Pressable onPress={() => handleMarkdown('underline', true)} className="px-3 py-1 bg-[#393C6C] rounded-full border border-[#8F7EDC]">
+                    <Pressable onPress={() => handleMarkdown('underline', true)} className="px-3 py-1 bg-dark-400 rounded-full border border-[#8F7EDC]">
                       <Text className="text-white underline">U</Text>
                     </Pressable>
                   </View>
@@ -331,7 +334,7 @@ export default function CalendarPage() {
               <Pressable
                 key={idx}
                 onPress={() => handleExpandDream(selectedDate, idx)}
-                className="flex-row items-center bg-[#393C6C] rounded-3xl px-4 py-4 shadow-lg mt-2"
+                className="flex-row items-center bg-dark-400 rounded-3xl px-4 py-4 shadow-lg mt-2"
                 style={{ minHeight: 80 }}
               >
                 <DateCircle date={selectedDate} />
@@ -345,9 +348,9 @@ export default function CalendarPage() {
           {/* Animated entry form, always shown below dreams */}
           {showEntry && (
             <Animated.View style={[{ overflow: 'hidden', marginTop: 16,marginBottom: 80, minHeight: 350, maxHeight: 520, borderRadius: 24 }, entryStyle]}>
-                <View className="w-full bg-[#23265A] rounded-2xl p-5 shadow-xl flex-1" style={{ minHeight: 320, maxHeight: 500, borderRadius: 24, justifyContent: 'flex-start' }}>
+                <View className="w-full bg-dark-300 rounded-2xl p-5 shadow-xl flex-1" style={{ minHeight: 320, maxHeight: 500, borderRadius: 24, justifyContent: 'flex-start' }}>
                   <TextInput
-                    className="text-white text-base mb-3 px-3 py-2 bg-[#393C6C] rounded-xl"
+                    className="text-white text-base mb-3 px-3 py-2 bg-dark-400 rounded-xl"
                     placeholder="Dream title..."
                     placeholderTextColor="#A8B5DB"
                     value={dreamTitle}
@@ -355,7 +358,7 @@ export default function CalendarPage() {
                     maxLength={100}
                   />
                   <TextInput
-                    className="text-white text-base mb-4 px-3 py-2 bg-[#393C6C] rounded-xl"
+                    className="text-white text-base mb-4 px-3 py-2 bg-dark-400 rounded-xl"
                     multiline
                     placeholder="Write your dream..."
                     placeholderTextColor="#A8B5DB"
@@ -367,13 +370,13 @@ export default function CalendarPage() {
                   />
                   {/* Markdown controls */}
                   <View className="flex-row justify-center space-x-4 mb-2">
-                    <Pressable onPress={() => handleMarkdown('bold')} className="px-3 py-1 bg-[#393C6C] rounded-full border border-[#8F7EDC]">
+                    <Pressable onPress={() => handleMarkdown('bold')} className="px-3 py-1 bg-dark-400 rounded-full border border-[#8F7EDC]">
                       <Text className="text-white font-bold">B</Text>
                     </Pressable>
-                    <Pressable onPress={() => handleMarkdown('italic')} className="px-3 py-1 bg-[#393C6C] rounded-full border border-[#8F7EDC]">
+                    <Pressable onPress={() => handleMarkdown('italic')} className="px-3 py-1 bg-dark-400 rounded-full border border-[#8F7EDC]">
                       <Text className="text-white italic">I</Text>
                     </Pressable>
-                    <Pressable onPress={() => handleMarkdown('underline')} className="px-3 py-1 bg-[#393C6C] rounded-full border border-[#8F7EDC]">
+                    <Pressable onPress={() => handleMarkdown('underline')} className="px-3 py-1 bg-dark-400 rounded-full border border-[#8F7EDC]">
                       <Text className="text-white underline">U</Text>
                     </Pressable>
                   </View>

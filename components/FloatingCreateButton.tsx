@@ -46,6 +46,7 @@ const FloatingCreateButton: React.FC<FloatingCreateButtonProps> = ({
     <>
       <Pressable
   onPress={handlePress}
+  className='bg-dark-400 rounded-full'
   style={{
     position: 'absolute',
     bottom: 118,
@@ -53,7 +54,6 @@ const FloatingCreateButton: React.FC<FloatingCreateButtonProps> = ({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: Colors.accent, 
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: Colors.accent,
@@ -65,7 +65,7 @@ const FloatingCreateButton: React.FC<FloatingCreateButtonProps> = ({
 >
   <Text
     style={{
-      color: '#000', 
+      color: '#fff', 
       fontSize: 32, 
       lineHeight: 36, 
       fontWeight: 'bold',

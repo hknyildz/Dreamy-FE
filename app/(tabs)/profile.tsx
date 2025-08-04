@@ -92,7 +92,7 @@ export default function Profile() {
         }
       >
         {/* Header section */}
-        <View className="bg-[#8F7EDC] rounded-b-3xl px-6 pt-2 pb-6 relative">
+        <View className="bg-dark-300 rounded-b-3xl px-6 pt-2 pb-6 relative">
           {/* Settings icon */}
           <Pressable className="absolute right-6 top-6 z-10" onPress={handleSignOut}>
             <Text className="text-white text-base">🚪</Text>
@@ -124,7 +124,7 @@ export default function Profile() {
           {dreams.map((dream, idx) => (
             <Pressable
               key={idx}
-              className="flex-row items-center mb-4 bg-[#393C6C] rounded-3xl px-4 py-3 shadow-lg"
+              className="flex-row items-center mb-4 bg-dark-400 rounded-3xl px-4 py-3 shadow-lg"
               style={{ minHeight: 64 }}
               onPress={() => router.push(`/dream/${dream.id}` as any)}
             >

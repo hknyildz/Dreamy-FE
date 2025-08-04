@@ -11,12 +11,12 @@ interface CommentCardProps {
 }
 
 const CommentCard: React.FC<CommentCardProps> = ({ username, avatar_url, content, created_at, canDelete, onDelete }) => (
-  <View className="mb-3 bg-[#393C6C] rounded-2xl px-4 py-3 shadow-md relative">
+  <View className="mb-3 bg-dark-400 rounded-2xl px-4 py-3 shadow-md relative">
     {/* Close button absolutely at top right */}
     {canDelete && (
       <Pressable
         onPress={onDelete}
-        className="absolute right-2 top-2 z-10 bg-[#23265A] mr-2 rounded-full w-7 h-7 items-center justify-center"
+        className="absolute right-2 top-2 z-10 bg-dark-300 mr-2 rounded-full w-7 h-7 items-center justify-center"
         style={{ alignSelf: 'flex-end' }} // (optional, for extra safety)
       >
         <Text className="text-[#ef4444] text-base font-bold">✕</Text>
