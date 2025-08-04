@@ -30,6 +30,10 @@ export default function RootLayout() {
           name="profile/[userId]"
           options={{ headerShown: true }} //TODO will change to false
         />
+        <Stack.Screen
+          name="create-dream"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </AuthProvider>
   );

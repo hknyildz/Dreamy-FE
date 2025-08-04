@@ -11,7 +11,7 @@ interface UserListItemProps {
 }
 
 const UserListItem: React.FC<UserListItemProps> = ({ username, bio, avatar_url, isFollowing, onFollowToggle, onPress }) => (
-  <Pressable onPress={onPress} className="flex-row items-center bg-[#393C6C] rounded-2xl px-4 py-3 mb-3 shadow-md">
+  <Pressable onPress={onPress} className="flex-row items-center bg-dark-400 rounded-2xl px-4 py-3 mb-3 shadow-md">
     {avatar_url ? (
       <View className="w-12 h-12 rounded-full bg-[#C1B6E3] mr-4 overflow-hidden items-center justify-center">
         <Image source={{ uri: avatar_url }} className="w-12 h-12 rounded-full" />

@@ -91,15 +91,15 @@ export default function DreamDetail() {
     <SafeAreaView className="flex-1 bg-[#181B3A]">
       <ScrollView contentContainerStyle={{ padding: 0 }}>
         {/* Dream Content */}
-        <View className="bg-[#23265A] rounded-3xl mx-4 mt-8 mb-4 shadow-xl p-0 overflow-hidden">
+        <View className="bg-dark-300 rounded-3xl mx-4 mt-8 mb-4 shadow-xl p-0 overflow-hidden">
           {/* Sağ üst çarpı */}
           {isOwner && (
-            <Pressable onPress={handleDreamDelete} className="absolute top-4 right-4 z-10 bg-[#393C6C] rounded-full w-9 h-9 items-center justify-center shadow-md">
+            <Pressable onPress={handleDreamDelete} className="absolute top-4 right-4 z-10 bg-dark-400 rounded-full w-9 h-9 items-center justify-center shadow-md">
               <Text className="text-[#ef4444] text-2xl font-bold">✕</Text>
             </Pressable>
           )}
           {/* Rüya sahibi avatar ve username */}
-          <View className="flex-row items-center px-6 py-5 bg-[#393C6C] border-b border-[#8F7EDC]">
+          <View className="flex-row items-center px-6 py-5 bg-dark-400 border-b border-[#8F7EDC]">
             {ownerProfile?.avatar_url ? (
               <View className="w-12 h-12 rounded-full bg-[#C1B6E3] mr-4 overflow-hidden items-center justify-center">
                 <img src={ownerProfile.avatar_url} alt="avatar" className="w-12 h-12 rounded-full" />
@@ -113,7 +113,7 @@ export default function DreamDetail() {
             <Text className="text-white text-xl font-bold mb-2">{dream.title}</Text>
             {isEditing ? (
               <TextInput
-                className="bg-[#23265A] text-white rounded-xl p-3 mb-2 border border-[#8F7EDC]"
+                className="bg-dark-300 text-white rounded-xl p-3 mb-2 border border-[#8F7EDC]"
                 multiline
                 value={editedContent}
                 onChangeText={setEditedContent}
@@ -142,7 +142,7 @@ export default function DreamDetail() {
           </View>
         </View>
         {/* Comments */}
-        <View className="bg-[#23265A] rounded-3xl mx-4 mb-8 shadow-xl p-0 overflow-hidden">
+        <View className="bg-dark-300 rounded-3xl mx-4 mb-8 shadow-xl p-0 overflow-hidden">
           <Text className="text-[#C1B6E3] text-lg font-bold px-6 pt-6 pb-2">Comments</Text>
           <View className="px-4 pb-4">
             {comments.length === 0 ? (
@@ -162,9 +162,9 @@ export default function DreamDetail() {
             )}
           </View>
           {/* Add Comment */}
-          <View className="flex-row items-center bg-[#393C6C] rounded-2xl mx-4 mb-6 px-4 py-3 shadow-md">
+          <View className="flex-row items-center bg-dark-400 rounded-2xl mx-4 mb-6 px-4 py-3 shadow-md">
             <TextInput
-              className="flex-1 bg-[#23265A] text-white rounded-xl p-3 mr-2 border border-[#8F7EDC]"
+              className="flex-1 bg-dark-300 text-white rounded-xl p-3 mr-2 border border-[#8F7EDC]"
               placeholder="Add a comment..."
               placeholderTextColor="#A8B5DB"
               value={newComment}

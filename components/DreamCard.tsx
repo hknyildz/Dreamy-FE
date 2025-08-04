@@ -12,7 +12,7 @@ interface DreamCardProps {
 }
 
 const DreamCard: React.FC<DreamCardProps> = ({ title, content, date, username, avatar_url, is_private, onPress }) => (
-  <Pressable onPress={onPress} className="flex-row items-center bg-[#393C6C] rounded-3xl px-4 py-4 shadow-lg mt-2 min-h-[80px]">
+  <Pressable onPress={onPress} className="flex-row items-center bg-dark-400 rounded-3xl px-4 py-4 shadow-lg mt-2 min-h-[80px]">
     {avatar_url ? (
       <View className="w-12 h-12 rounded-full bg-[#C1B6E3] mr-4 overflow-hidden items-center justify-center">
         <Image source={{ uri: avatar_url }} className="w-12 h-12 rounded-full" />
