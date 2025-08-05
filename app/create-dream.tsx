@@ -12,8 +12,11 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { images } from '@/constants/images';
+import { useAuth } from '@/contexts/AuthContext';
+import { createDream } from '@/services/dreamService';
 
 export default function CreateDream() {
+  const { user } = useAuth();
   const [dreamTitle, setDreamTitle] = useState('');
   const [dreamContent, setDreamContent] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
@@ -34,24 +37,41 @@ export default function CreateDream() {
       return;
     }
 
+    if (!user?.id) {
+      Alert.alert('Hata', 'Kullanıcı oturumu bulunamadı.');
+      return;
+    }
+
     setIsLoading(true);
     
     try {
-      // TODO: Burada rüyayı kaydetme işlemi yapılacak
-      console.log('Rüya kaydediliyor:', {
-        title: dreamTitle,
-        content: dreamContent,
+      // DreamService üzerinden rüyayı kaydet
+      const dreamDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+      const success = await createDream(
+        dreamTitle.trim(),
+        dreamContent.trim(),
         isPrivate,
-        date: new Date().toISOString()
-      });
-      
-      Alert.alert('Başarılı', 'Rüyanız kaydedildi!', [
-        {
-          text: 'Tamam',
-          onPress: handleClose
-        }
-      ]);
+        dreamDate,
+        user.id
+      );
+
+      if (success) {
+        Alert.alert('Başarılı', 'Rüyanız kaydedildi!', [
+          {
+            text: 'Tamam',
+            onPress: handleClose
+          }
+        ]);
+      } else {
+        Alert.alert('Bilgi', 'Rüya offline olarak kaydedildi ve bağlantı sağlandığında senkronize edilecek.', [
+          {
+            text: 'Tamam',
+            onPress: handleClose
+          }
+        ]);
+      }
     } catch (error) {
+      console.error('Error saving dream:', error);
       Alert.alert('Hata', 'Rüya kaydedilemedi.');
     } finally {
       setIsLoading(false);

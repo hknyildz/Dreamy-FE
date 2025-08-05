@@ -11,7 +11,9 @@ create table profiles (
 create table dreams (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references profiles(id) on delete cascade,
+  title text not null check (length(title) <= 100),
   content text not null check (length(content) <= 2000),
+  dream_date date not null default current_date,
   is_private boolean default false,
   created_at timestamp with time zone default timezone('utc', now())
 );
