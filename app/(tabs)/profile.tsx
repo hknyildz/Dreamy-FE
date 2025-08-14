@@ -21,7 +21,7 @@ function DateCircle({ timestamp }: Props) {
   
 
   return (
-    <View className="w-12 h-14 bg-[#8F7EDC] rounded-full items-center justify-center mr-4 py-1">
+    <View className="w-12 h-14 bg-light-400 rounded-full items-center justify-center mr-4 py-1">
       <Text className="text-white text-base font-bold leading-5 mb-1">{day}</Text>
       <Text className="text-white text-xs font-bold lowercase leading-3">{month}</Text>
     </View>
@@ -99,7 +99,7 @@ export default function Profile() {
           </Pressable>
           {/* Avatar - floating/overflow */}
           <View className="items-center">
-            <View className="w-24 h-24 rounded-full bg-[#C1B6E3] border-4 border-white absolute-top-12 z-20 shadow-lg" />
+            <View className="w-24 h-24 rounded-full bg-light-400 border-4 border-white absolute-top-12 z-20 shadow-lg" />
           </View>
           {/* Username and stats */}
           <View className="items-center mt-4">
