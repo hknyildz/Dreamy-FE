@@ -16,9 +16,9 @@ export default function Index() {
   };
 
   return (
-    <View className="flex-1 bg-primary justify-between py-20">
+    <View className="flex-1 bg-[#181B3A] justify-between py-20">
       {/* Night sky background */}
-      <Image source={images.bg} className="absolute w-full h-full z-0" resizeMode="cover" />
+      {/* <Image source={images.bg} className="absolute w-full h-full z-0" resizeMode="cover" /> */}
       {/* Moon and branch (optional, can be added to bg image) */}
       {/* Collapsed state */}
       {!expanded && (
